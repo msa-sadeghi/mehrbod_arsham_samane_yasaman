@@ -67,5 +67,21 @@ while running == True:
         score += 1
         new_tail = create_turtle("square","darkgreen")
         all_tails.append(new_tail)
+    
+    for i in range(len(all_tails)-1, 0, -1):
+        x = all_tails[i-1].xcor()
+        y = all_tails[i-1].ycor()
+        all_tails[i].goto(x,y)
+    if len(all_tails) > 0:
+        all_tails[0].goto(snake_head.xcor(), snake_head.ycor())
+    
+    if snake_head.xcor() > 290 or snake_head.xcor() < -290:
+        snake_head.setx(-1  *  snake_head.xcor())
+    if snake_head.ycor() > 240:
+        snake_head.sety(-290)
+    if snake_head.ycor() < -290:
+        snake_head.sety(240)
+        
     move()
+        
     time.sleep(0.2)
