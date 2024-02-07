@@ -51,6 +51,7 @@ screen.onkeypress(go_left,"Left")
 screen.onkeypress(go_right,"Right")
 
 score = 0
+highscore = 0
 scoreboard = create_turtle("square", "white")
 scoreboard.goto(0, 260)
 scoreboard.ht()
@@ -60,11 +61,13 @@ all_tails = []
 running = True
 while running == True:
     scoreboard.clear()
-    scoreboard.write(f"Score:{score}", font=("arial",22), align="center")
+    scoreboard.write(f"Score:{score}, HighScore:{highscore}", font=("arial",22), align="center")
     screen.update()
     if snake_head.distance(snake_food) < 20:
         change_food_pos()
         score += 1
+        if score > highscore:
+            highscore = score
         new_tail = create_turtle("square","darkgreen")
         all_tails.append(new_tail)
     
@@ -83,5 +86,15 @@ while running == True:
         snake_head.sety(240)
         
     move()
+    for tail in all_tails:
+        if tail.distance(snake_head) < 20:
+            snake_head.goto(0,0)
+            snake_head.direction = ""
+            for tail in all_tails:
+                tail.hideturtle()
+            score = 0
+            all_tails = []
+            break
+    
         
     time.sleep(0.2)
