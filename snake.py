@@ -1,6 +1,7 @@
 import turtle
 import random
 import time
+import os
 screen = turtle.Screen()
 screen.bgcolor("black")
 screen.setup(600, 600)
@@ -51,11 +52,26 @@ screen.onkeypress(go_left,"Left")
 screen.onkeypress(go_right,"Right")
 
 score = 0
-highscore = 0
+if os.path.exists("score.txt"):
+    my_file = open("score.txt", "r")
+    highscore = int(my_file.read())
+else:
+    highscore = 0
 scoreboard = create_turtle("square", "white")
 scoreboard.goto(0, 260)
 scoreboard.ht()
 
+def close_my_window():
+    global running
+    running = False
+    my_file = open("score.txt", "w")
+    my_file.write(str(highscore))
+    my_file.close()
+
+
+root = screen._root
+root.protocol("WM_DELETE_WINDOW", close_my_window)
+root.resizable(False, False)
 
 all_tails = []
 running = True
