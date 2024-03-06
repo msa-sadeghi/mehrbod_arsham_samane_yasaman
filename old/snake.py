@@ -34,13 +34,17 @@ def move():
         x += 20
         snake_head.setx(x)
 def go_up():
-    snake_head.direction = "up"
+    if snake_head.direction != "down":
+        snake_head.direction = "up"
 def go_down():
-    snake_head.direction = "down"
+    if snake_head.direction != "up":
+        snake_head.direction = "down"
 def go_left():
-    snake_head.direction = "left"
+    if snake_head.direction != "right":
+        snake_head.direction = "left"
 def go_right():
-    snake_head.direction = "right"
+    if snake_head.direction != "left":
+        snake_head.direction = "right"
 snake_head = create_turtle("square", "green")
 snake_head.direction = ""
 snake_food = create_turtle("circle", "red")
