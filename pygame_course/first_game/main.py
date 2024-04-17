@@ -21,6 +21,13 @@ duck_rect.bottomleft = (0, SCREEN_HEIGHT)
 # duck_rect.left = 0
 # duck_rect.bottom = SCREEN_HEIGHT
 
+
+f = pygame.font.Font("Abrushow.ttf",32)
+score_text = f.render(f"Score:{score}", True, (255, 255, 255))
+score_rect = score_text.get_rect()
+score_rect.topleft = (0,0)
+
+
 running = True
 while running:
     for event in pygame.event.get():
@@ -39,9 +46,10 @@ while running:
         duck_rect.bottomleft = (0, SCREEN_HEIGHT)
         score += 1
         
-        
+    score_text = f.render(f"Score:{score}", True, (255, 255, 255))    
     screen.fill((205, 0,100)) 
     screen.blit(fox_image, fox_rect)       
-    screen.blit(duck_image, duck_rect)       
+    screen.blit(duck_image, duck_rect)
+    screen.blit(score_text, score_rect)
     pygame.display.update()
     clock.tick(FPS)
