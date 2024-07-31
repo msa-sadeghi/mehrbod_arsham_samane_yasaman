@@ -18,6 +18,7 @@ class Cat:
         self.last_update_time = 0
         self.direction = 1
         self.moving = False
+        self.y_speed = 0
         
     def draw(self, screen):
         
@@ -51,8 +52,14 @@ class Cat:
         if not keys[pygame.K_LEFT] and not keys[pygame.K_RIGHT]:
             self.moving = False
             
+        if keys[pygame.K_SPACE]   :
+            self.y_speed = -14
             
-            
+        self.y_speed += 1
+        dy += self.y_speed
+        if self.rect.bottom + dy >= 360:
+            self.y_speed = 0
+            dy = 0
             
         self.rect.x += dx
         self.rect.y += dy
